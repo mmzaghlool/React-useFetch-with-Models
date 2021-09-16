@@ -1,6 +1,6 @@
 {
     "name": "react-usefetch-models",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "",
     "main": "build/index.js",
     "module": "build/index.js",
@@ -11,10 +11,12 @@
         "test": "jest"
     },
     "keywords": [
-        "nodejs",
-        "mysql",
-        "meddleWare"
+        "react",
+        "react-native",
+        "useFetch",
+        "Models"
     ],
+    "homepage": "https://github.com/mmzaghlool",
     "devDependencies": {
         "@types/express": "^4.17.13",
         "@types/jest": "^27.0.1",
