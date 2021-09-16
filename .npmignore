@@ -1,0 +1,8 @@
+node_modules/
+src/
+test/
+
+./app.ts
+.eslintrc
+.prettierrc.json
+tsconfig.json

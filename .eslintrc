@@ -1,0 +1,26 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": false,
+        "es2021": true,
+        "jest": true
+    },
+    "extends": ["google", "plugin:vue/essential", "eslint:recommended", "@vue/typescript"],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 12
+    },
+    "rules": {
+        "linebreak-style": 0,
+        "indent": 0,
+        "quote-props": 0,
+        "max-len": [2, 120, 2],
+        "space-before-function-paren": 0,
+        "new-cap": "warn",
+        "operator-linebreak": "off",
+        "no-undef": "error",
+        "no-const-assign": "error",
+        "require-jsdoc": "off",
+        "no-async-promise-executor": "off"
+    }
+}
