@@ -1,5 +1,5 @@
 /* eslint-disable guard-for-in */
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 import fetchData from './fetchData';
 import {bodyType, objectStringsType, useFetchType} from './types';
 
@@ -17,7 +17,7 @@ function useFetch<D = bodyType>(
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<objectStringsType>();
 
-    function execute(data: D, headers?: objectStringsType) {
+    const execute = useCallback((data: D, headers?: objectStringsType) => {
         setLoading(true);
         setData(undefined);
         setError(undefined);
@@ -39,7 +39,7 @@ function useFetch<D = bodyType>(
                     reject(err);
                 });
         });
-    }
+    }, []);
 
     return [loading, execute, data, error];
 }
