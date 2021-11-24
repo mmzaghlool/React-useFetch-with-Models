@@ -1,4 +1,4 @@
-import {bodyType, objectStringsType} from './types';
+import {bodyType, objectStringsType, useFetchConfig} from './types';
 import useFetch from './useFetch';
 
 /**
@@ -11,124 +11,128 @@ export default class BackendCall {
         private defaultHeaders: objectStringsType = {},
         private defaultSuccessFunction: Function = (res: any) => res,
         private defaultErrorFunction: Function = (err: any) => err,
+        private useFetchConfig: useFetchConfig = {promiseReject: true, promiseResolve: true},
     ) {}
 
-    // useFetchConfig: useFetchConfig = {promiseReject: true, promiseResolve: true},
-    // handleIsShortHanded() {
+    handleIsShortHanded(useFetchCustomConfig?: useFetchConfig): useFetchConfig {
+        if (useFetchCustomConfig) {
+            return useFetchCustomConfig;
+        } else {
+            return this.useFetchConfig;
+        }
+    }
 
-    // }
-
-    public postData<D>(
-        endPoint: string,
-        bodyDefault?: bodyType,
-        queryDefault?: objectStringsType,
-        // isShortHand?: boolean,
-    ) {
+    public postData<D>(config: {
+        endPoint: string;
+        bodyDefault?: bodyType;
+        queryDefault?: objectStringsType;
+        useFetchCustomConfig?: useFetchConfig;
+    }) {
         return useFetch<D>(
-            endPoint,
+            config.endPoint,
             'POST',
-            bodyDefault,
-            queryDefault,
+            config.bodyDefault,
+            config.queryDefault,
             this.baseApiUrl,
             this.defaultHeaders,
             this.defaultSuccessFunction,
             this.defaultErrorFunction,
-            // isShortHand,
+            this.handleIsShortHanded(config.useFetchCustomConfig),
         );
     }
 
-    public getData<D>(
-        endPoint: string,
-        queryDefault?: objectStringsType,
-        // isShortHand = false
-    ) {
+    public getData<D>(config: {
+        endPoint: string;
+        queryDefault?: objectStringsType;
+        useFetchCustomConfig?: useFetchConfig;
+    }) {
         return useFetch<D>(
-            endPoint,
+            config.endPoint,
             'GET',
             undefined,
-            queryDefault,
+            config.queryDefault,
             this.baseApiUrl,
             this.defaultHeaders,
             this.defaultSuccessFunction,
             this.defaultErrorFunction,
-            // isShortHand,
+            this.handleIsShortHanded(config.useFetchCustomConfig),
         );
     }
 
-    public updateData<D>(
-        endPoint: string,
-        bodyDefault?: bodyType,
-        queryDefault?: objectStringsType,
-        // isShortHand = false,
-    ) {
+    public updateData<D>(config: {
+        endPoint: string;
+        bodyDefault?: bodyType;
+        queryDefault?: objectStringsType;
+        useFetchCustomConfig?: useFetchConfig;
+    }) {
         return useFetch<D>(
-            endPoint,
+            config.endPoint,
             'PUT',
-            bodyDefault,
-            queryDefault,
+            config.bodyDefault,
+            config.queryDefault,
             this.baseApiUrl,
             this.defaultHeaders,
             this.defaultSuccessFunction,
             this.defaultErrorFunction,
-            // isShortHand,
+            this.handleIsShortHanded(config.useFetchCustomConfig),
         );
     }
 
-    public patchData<D>(
-        endPoint: string,
-        bodyDefault?: bodyType,
-        queryDefault?: objectStringsType,
-        // isShortHand = false,
-    ) {
+    public patchData<D>(config: {
+        endPoint: string;
+        bodyDefault?: bodyType;
+        queryDefault?: objectStringsType;
+        useFetchCustomConfig?: useFetchConfig;
+    }) {
         return useFetch<D>(
-            endPoint,
+            config.endPoint,
             'PATCH',
-            bodyDefault,
-            queryDefault,
+            config.bodyDefault,
+            config.queryDefault,
             this.baseApiUrl,
             this.defaultHeaders,
             this.defaultSuccessFunction,
             this.defaultErrorFunction,
-            // isShortHand,
+            this.handleIsShortHanded(config.useFetchCustomConfig),
         );
     }
 
-    public deleteData<D>(
-        endPoint: string,
-        bodyDefault?: bodyType,
-        queryDefault?: objectStringsType,
-        // isShortHand = false,
-    ) {
+    public deleteData<D>(config: {
+        endPoint: string;
+        bodyDefault?: bodyType;
+        queryDefault?: objectStringsType;
+        useFetchCustomConfig?: useFetchConfig;
+    }) {
         return useFetch<D>(
-            endPoint,
+            config.endPoint,
             'DELETE',
-            bodyDefault,
-            queryDefault,
+            config.bodyDefault,
+            config.queryDefault,
             this.baseApiUrl,
             this.defaultHeaders,
             this.defaultSuccessFunction,
             this.defaultErrorFunction,
-            // isShortHand,
+            this.handleIsShortHanded(config.useFetchCustomConfig),
         );
     }
 
-    public custom<D>(
-        endPoint: string,
-        method: string,
-        bodyDefault?: bodyType,
-        queryDefault?: objectStringsType,
-        // isShortHand = false,
-    ) {
+    public custom<D>(config: {
+        endPoint: string;
+        method: string;
+        bodyDefault?: bodyType;
+        queryDefault?: objectStringsType;
+        useFetchCustomConfig?: useFetchConfig;
+    }) {
         return useFetch<D>(
-            endPoint,
-            method,
-            bodyDefault,
-            queryDefault,
+            config.endPoint,
+            config.method,
+            config.bodyDefault,
+            config.queryDefault,
             this.baseApiUrl,
             this.defaultHeaders,
             this.defaultSuccessFunction,
             this.defaultErrorFunction,
-            // isShortHand,
+            this.handleIsShortHanded(config.useFetchCustomConfig),
         );
     }
 }

@@ -1,7 +1,7 @@
 /* eslint-disable guard-for-in */
 import {useCallback, useState} from 'react';
 import fetchData from './fetchData';
-import {bodyType, objectStringsType, useFetchType} from './types';
+import {bodyType, objectStringsType, useFetchConfig, useFetchType} from './types';
 
 function useFetch<D = bodyType>(
     endPoint: string,
@@ -12,7 +12,7 @@ function useFetch<D = bodyType>(
     defaultHeaders: objectStringsType,
     defaultSuccessFunction: Function,
     defaultErrorFunction: Function,
-    // isShortHand: boolean = false,
+    useFetchConfig: useFetchConfig,
 ): useFetchType<D> {
     const [data, setData] = useState<any>();
     const [loading, setLoading] = useState<boolean>(false);
@@ -31,17 +31,19 @@ function useFetch<D = bodyType>(
             fetchData(finalUrl, body, method, finalHeaders, defaultSuccessFunction, defaultErrorFunction)
                 .then((d: any) => {
                     setData(d);
-                    resolve(d);
+                    if (useFetchConfig.promiseResolve) {
+                        resolve(d);
+                    }
                     setLoading(false);
-                    return d;
+                    return;
                 })
                 .catch((err) => {
                     setError(err);
-                    // if (isShortHand) {
-                    reject(err);
-                    // }
+                    if (useFetchConfig.promiseReject) {
+                        reject(err);
+                    }
                     setLoading(false);
-                    return err;
+                    return;
                 });
         });
     }, []);
