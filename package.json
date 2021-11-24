@@ -1,6 +1,6 @@
 {
     "name": "react-usefetch-models",
-    "version": "2.0.2",
+    "version": "2.0.3",
     "description": "A quick way to bind your react or react native code with predefined useFetches and backend calls",
     "main": "build/index.js",
     "module": "build/index.js",
@@ -14,7 +14,12 @@
         "react",
         "react-native",
         "useFetch",
-        "Models"
+        "hooks",
+        "custom-hooks",
+        "Models",
+        "fetch",
+        "backend",
+        "axios"
     ],
     "homepage": "https://github.com/mmzaghlool",
     "devDependencies": {
