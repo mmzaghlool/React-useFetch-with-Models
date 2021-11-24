@@ -1,12 +1,27 @@
 # React useFetch Models
 
-![NPM](https://img.shields.io/npm/v/react-usefetch-models.svg)
-![NPM](https://img.shields.io/npm/dt/react-usefetch-models.svg)
+![NPM](https://img.shields.io/npm/v/react-usefetch-models)
+![NPM](https://img.shields.io/npm/dt/react-usefetch-models)
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-usefetch-models)
 
-A quick way to bind your react/react native code with predefined useFetches
+A quick way to bind your react/react native code with predefined useFetches.
 
-## Initiating Project configs
+Compatible with JS and TS
+
+## [Reach Me](reach-me)
+
+If you need to report an issue or have suggestions feel free to contact me
+
+<a href="https://www.linkedin.com/in/mmzaghlool/"><img align="center" src="https://icon-library.com/images/linkedin-icon-png-transparent-background/linkedin-icon-png-transparent-background-15.jpg" alt="LinkedIn profile" height="40" width="40" /></a>
+<a href="mailto:mmzaghlool52@gmail.com"><img align="center" src="https://cdn.iconscout.com/icon/free/png-256/gmail-2981844-2476484.png" alt="Gmail account" height="40" width="40" /></a>
+
+## [Installation](installation)
+
+```bash
+npm i react-usefetch-models
+```
+
+## [Initiating Project configs](initiating-project-configs)
 
 ```ts
 import {BackendCall} from 'react-usefetch-models';
@@ -34,12 +49,24 @@ async function defaultErrorFunction(err: any): Promise<any> {
     return err;
 }
 
-const Backend = new BackendCall(baseApiUrl, defaultHeaders, defaultSuccessFunction, defaultErrorFunction);
+const Backend = new BackendCall(
+    baseApiUrl,
+    defaultHeaders,
+    defaultSuccessFunction,
+    defaultErrorFunction,
+    /**
+     * OPTIONAL you can pass a configs that controls if the useFetch should return the data as Promise or not
+     * Default is {promiseReject: true, promiseResolve: true}
+     *
+     * if promiseReject
+     */
+    {promiseReject: true, promiseResolve: true},
+);
 
 export default Backend;
 ```
 
-## Models
+## [Models](models)
 
 ```ts
 import Backend from './Backend';
@@ -77,8 +104,15 @@ class TestModel {
          * You have a collection of functions like (postData, getData, updateData, patchData, deleteData, and custom)
          * Note that `getData` function can not have a body
          * and in the `custom` you can provide your method
+         *
+         * If you need to specify custom useFetchConfig for specific function you can pass `useFetchCustomConfig`
          */
-        return Backend.postData<loginUserType>(endPoint, bodyDefault, queryDefault);
+        return Backend.postData<loginUserType>({
+            endPoint,
+            bodyDefault,
+            queryDefault,
+            useFetchCustomConfig: {promiseReject: false, promiseResolve: false},
+        });
     }
 
     getUser() {
@@ -92,14 +126,14 @@ class TestModel {
         /**
          * Note that `getData` function can not have a body
          */
-        return Backend.postData<getUserType>(endPoint);
+        return Backend.getData<getUserType>({endPoint});
     }
 }
 
 export default TestModel;
 ```
 
-## Usage
+## [Usage](usage)
 
 ```ts
 import React from 'react';
@@ -107,7 +141,7 @@ import TestModel from './Model';
 
 const model = new TestModel();
 
-const Footer: React.FC = () => {
+const Component: React.FC = () => {
     /**
      * Every method returns useFetch after execution
      * every useFetch has 4 positional parameters (loading, execute, data, error)
@@ -120,6 +154,13 @@ const Footer: React.FC = () => {
     // ...Other code
 
     const someFunction = () => {
+        /**
+         * PS: React will throw an error "Unhandled Rejection" if u did not handle the promise rejection with .catch
+         *
+         * To solve this you must set `promiseReject` to `false` in the `useFetchConfig` or `useFetchCustomConfig`
+         *
+         * For React Native it should not be a problem
+         */
         executeLogin({bodyVariable2: 10, queryVariable: '', variable: ''});
 
         executeShort({uid: ''})
@@ -127,6 +168,8 @@ const Footer: React.FC = () => {
             .catch((err) => {});
     };
 
-    return <div />;
+    return <button onClick={someFunction}>Test</button>;
 };
+
+export default Component;
 ```
