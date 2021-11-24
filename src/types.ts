@@ -6,3 +6,8 @@ export type useFetchType<D = bodyType> = [
     data: any | undefined,
     error: objectStringsType | string | undefined,
 ];
+
+// export type useFetchConfig = {
+//     promiseResolve: boolean;
+//     promiseReject: boolean;
+// };

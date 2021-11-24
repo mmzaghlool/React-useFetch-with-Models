@@ -13,7 +13,17 @@ export default class BackendCall {
         private defaultErrorFunction: Function = (err: any) => err,
     ) {}
 
-    public postData<D>(endPoint: string, bodyDefault?: bodyType, queryDefault?: objectStringsType) {
+    // useFetchConfig: useFetchConfig = {promiseReject: true, promiseResolve: true},
+    // handleIsShortHanded() {
+
+    // }
+
+    public postData<D>(
+        endPoint: string,
+        bodyDefault?: bodyType,
+        queryDefault?: objectStringsType,
+        // isShortHand?: boolean,
+    ) {
         return useFetch<D>(
             endPoint,
             'POST',
@@ -23,10 +33,15 @@ export default class BackendCall {
             this.defaultHeaders,
             this.defaultSuccessFunction,
             this.defaultErrorFunction,
+            // isShortHand,
         );
     }
 
-    public getData<D>(endPoint: string, queryDefault?: objectStringsType) {
+    public getData<D>(
+        endPoint: string,
+        queryDefault?: objectStringsType,
+        // isShortHand = false
+    ) {
         return useFetch<D>(
             endPoint,
             'GET',
@@ -36,10 +51,16 @@ export default class BackendCall {
             this.defaultHeaders,
             this.defaultSuccessFunction,
             this.defaultErrorFunction,
+            // isShortHand,
         );
     }
 
-    public updateData<D>(endPoint: string, bodyDefault?: bodyType, queryDefault?: objectStringsType) {
+    public updateData<D>(
+        endPoint: string,
+        bodyDefault?: bodyType,
+        queryDefault?: objectStringsType,
+        // isShortHand = false,
+    ) {
         return useFetch<D>(
             endPoint,
             'PUT',
@@ -49,10 +70,16 @@ export default class BackendCall {
             this.defaultHeaders,
             this.defaultSuccessFunction,
             this.defaultErrorFunction,
+            // isShortHand,
         );
     }
 
-    public patchData<D>(endPoint: string, bodyDefault?: bodyType, queryDefault?: objectStringsType) {
+    public patchData<D>(
+        endPoint: string,
+        bodyDefault?: bodyType,
+        queryDefault?: objectStringsType,
+        // isShortHand = false,
+    ) {
         return useFetch<D>(
             endPoint,
             'PATCH',
@@ -62,10 +89,16 @@ export default class BackendCall {
             this.defaultHeaders,
             this.defaultSuccessFunction,
             this.defaultErrorFunction,
+            // isShortHand,
         );
     }
 
-    public deleteData<D>(endPoint: string, bodyDefault?: bodyType, queryDefault?: objectStringsType) {
+    public deleteData<D>(
+        endPoint: string,
+        bodyDefault?: bodyType,
+        queryDefault?: objectStringsType,
+        // isShortHand = false,
+    ) {
         return useFetch<D>(
             endPoint,
             'DELETE',
@@ -75,10 +108,17 @@ export default class BackendCall {
             this.defaultHeaders,
             this.defaultSuccessFunction,
             this.defaultErrorFunction,
+            // isShortHand,
         );
     }
 
-    public custom<D>(endPoint: string, method: string, bodyDefault?: bodyType, queryDefault?: objectStringsType) {
+    public custom<D>(
+        endPoint: string,
+        method: string,
+        bodyDefault?: bodyType,
+        queryDefault?: objectStringsType,
+        // isShortHand = false,
+    ) {
         return useFetch<D>(
             endPoint,
             method,
@@ -88,6 +128,7 @@ export default class BackendCall {
             this.defaultHeaders,
             this.defaultSuccessFunction,
             this.defaultErrorFunction,
+            // isShortHand,
         );
     }
 }

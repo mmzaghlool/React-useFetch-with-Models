@@ -1,11 +1,15 @@
 # React useFetch Models
 
+![NPM](https://img.shields.io/npm/v/react-usefetch-models.svg)
+![NPM](https://img.shields.io/npm/dt/react-usefetch-models.svg)
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-usefetch-models)
+
 A quick way to bind your react/react native code with predefined useFetches
 
 ## Initiating Project configs
 
 ```ts
-import {BackendCall} from '../build';
+import {BackendCall} from 'react-usefetch-models';
 
 //  API Backend base url
 const baseApiUrl = '';

@@ -1,6 +1,6 @@
 {
     "name": "react-usefetch-models",
-    "version": "1.0.3",
+    "version": "1.0.9",
     "description": "",
     "main": "build/index.js",
     "module": "build/index.js",

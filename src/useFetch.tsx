@@ -12,6 +12,7 @@ function useFetch<D = bodyType>(
     defaultHeaders: objectStringsType,
     defaultSuccessFunction: Function,
     defaultErrorFunction: Function,
+    // isShortHand: boolean = false,
 ): useFetchType<D> {
     const [data, setData] = useState<any>();
     const [loading, setLoading] = useState<boolean>(false);
@@ -29,14 +30,18 @@ function useFetch<D = bodyType>(
         return new Promise((resolve, reject) => {
             fetchData(finalUrl, body, method, finalHeaders, defaultSuccessFunction, defaultErrorFunction)
                 .then((d: any) => {
-                    setLoading(false);
                     setData(d);
                     resolve(d);
+                    setLoading(false);
+                    return d;
                 })
                 .catch((err) => {
-                    setLoading(false);
                     setError(err);
+                    // if (isShortHand) {
                     reject(err);
+                    // }
+                    setLoading(false);
+                    return err;
                 });
         });
     }, []);
