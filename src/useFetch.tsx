@@ -76,7 +76,7 @@ function bodyRefactoring(
         }
     }
 
-    query = query.substring(0, -1);
+    query = query.substring(0, query.length - 1);
 
     const bodyLength = Object.keys(body).length;
     if (bodyLength === 0) {

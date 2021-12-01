@@ -1,6 +1,6 @@
 {
     "name": "react-usefetch-models",
-    "version": "2.0.3",
+    "version": "2.0.4",
     "description": "A quick way to bind your react or react native code with predefined useFetches and backend calls",
     "main": "build/index.js",
     "module": "build/index.js",
@@ -13,11 +13,14 @@
     "keywords": [
         "react",
         "react-native",
+        "react useFetch",
         "useFetch",
         "hooks",
+        "react hook",
         "custom-hooks",
         "Models",
         "fetch",
+        "http",
         "backend",
         "axios"
     ],
