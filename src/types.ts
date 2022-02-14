@@ -1,9 +1,9 @@
 export type bodyType = {[key: string]: any};
 export type objectStringsType = {[key: string]: string};
-export type useFetchType<D = bodyType> = [
+export type useFetchType<D, T> = [
     loading: boolean,
-    execute: (data: D, headers?: objectStringsType) => Promise<any>,
-    data: any | undefined,
+    execute: (data: D, headers?: objectStringsType) => Promise<T>,
+    data: T | undefined,
     error: objectStringsType | string | undefined,
 ];
 

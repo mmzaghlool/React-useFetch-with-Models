@@ -2,6 +2,7 @@
 
 ![NPM](https://img.shields.io/npm/v/react-usefetch-models)
 ![NPM](https://img.shields.io/npm/dt/react-usefetch-models)
+![NPM](https://img.shields.io/npm/dm/react-usefetch-models)
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-usefetch-models)
 
 A quick way to bind your react/react native code with predefined useFetches.
@@ -78,6 +79,11 @@ import Backend from './Backend';
  */
 export type loginUserType = {variable: string; bodyVariable?: string; bodyVariable2: number; queryVariable: string};
 
+/**
+ *
+ */
+export type loginUserResponseType = {variable: string};
+
 export type getUserType = {uid: string};
 
 class TestModel {
@@ -107,7 +113,7 @@ class TestModel {
          *
          * If you need to specify custom useFetchConfig for specific function you can pass `useFetchCustomConfig`
          */
-        return Backend.postData<loginUserType>({
+        return Backend.postData<loginUserType, loginUserResponseType>({
             endPoint,
             bodyDefault,
             queryDefault,
@@ -141,10 +147,12 @@ import TestModel from './Model';
 
 const model = new TestModel();
 
-const Component: React.FC = () => {
+const Footer: React.FC = () => {
     /**
      * Every method returns useFetch after execution
      * every useFetch has 4 positional parameters (loading, execute, data, error)
+     *
+     * data here "dataLogin" will take the "loginUserResponseType" pre defined in the Model
      */
     const [loadingLogin, executeLogin, dataLogin, errorLogin] = model.loginUser();
 
@@ -154,22 +162,16 @@ const Component: React.FC = () => {
     // ...Other code
 
     const someFunction = () => {
-        /**
-         * PS: React will throw an error "Unhandled Rejection" if u did not handle the promise rejection with .catch
-         *
-         * To solve this you must set `promiseReject` to `false` in the `useFetchConfig` or `useFetchCustomConfig`
-         *
-         * For React Native it should not be a problem
-         */
         executeLogin({bodyVariable2: 10, queryVariable: '', variable: ''});
 
+        /**
+         * res here will be "any" because it's not defined in the Model
+         */
         executeShort({uid: ''})
             .then((res) => {})
             .catch((err) => {});
     };
 
-    return <button onClick={someFunction}>Test</button>;
+    return <div />;
 };
-
-export default Component;
 ```

@@ -3,7 +3,7 @@ import {useCallback, useState} from 'react';
 import fetchData from './fetchData';
 import {bodyType, objectStringsType, useFetchConfig, useFetchType} from './types';
 
-function useFetch<D = bodyType>(
+function useFetch<D = bodyType, T = any>(
     endPoint: string,
     method: string = 'GET',
     bodyDefault: bodyType = {},
@@ -13,12 +13,12 @@ function useFetch<D = bodyType>(
     defaultSuccessFunction: Function,
     defaultErrorFunction: Function,
     useFetchConfig: useFetchConfig,
-): useFetchType<D> {
+): useFetchType<D, T> {
     const [data, setData] = useState<any>();
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<objectStringsType>();
 
-    const execute = useCallback((data: D, headers?: objectStringsType) => {
+    const execute = useCallback((data: D, headers?: objectStringsType): Promise<T> => {
         setLoading(true);
         setData(undefined);
         setError(undefined);

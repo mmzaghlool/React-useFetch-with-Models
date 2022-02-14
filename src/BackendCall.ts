@@ -22,13 +22,13 @@ export default class BackendCall {
         }
     }
 
-    public postData<D>(config: {
+    public postData<D, T = any>(config: {
         endPoint: string;
         bodyDefault?: bodyType;
         queryDefault?: objectStringsType;
         useFetchCustomConfig?: useFetchConfig;
     }) {
-        return useFetch<D>(
+        return useFetch<D, T>(
             config.endPoint,
             'POST',
             config.bodyDefault,
@@ -41,12 +41,12 @@ export default class BackendCall {
         );
     }
 
-    public getData<D>(config: {
+    public getData<D, T = any>(config: {
         endPoint: string;
         queryDefault?: objectStringsType;
         useFetchCustomConfig?: useFetchConfig;
     }) {
-        return useFetch<D>(
+        return useFetch<D, T>(
             config.endPoint,
             'GET',
             undefined,
@@ -59,13 +59,13 @@ export default class BackendCall {
         );
     }
 
-    public updateData<D>(config: {
+    public updateData<D, T = any>(config: {
         endPoint: string;
         bodyDefault?: bodyType;
         queryDefault?: objectStringsType;
         useFetchCustomConfig?: useFetchConfig;
     }) {
-        return useFetch<D>(
+        return useFetch<D, T>(
             config.endPoint,
             'PUT',
             config.bodyDefault,
@@ -78,13 +78,13 @@ export default class BackendCall {
         );
     }
 
-    public patchData<D>(config: {
+    public patchData<D, T = any>(config: {
         endPoint: string;
         bodyDefault?: bodyType;
         queryDefault?: objectStringsType;
         useFetchCustomConfig?: useFetchConfig;
     }) {
-        return useFetch<D>(
+        return useFetch<D, T>(
             config.endPoint,
             'PATCH',
             config.bodyDefault,
@@ -97,13 +97,13 @@ export default class BackendCall {
         );
     }
 
-    public deleteData<D>(config: {
+    public deleteData<D, T = any>(config: {
         endPoint: string;
         bodyDefault?: bodyType;
         queryDefault?: objectStringsType;
         useFetchCustomConfig?: useFetchConfig;
     }) {
-        return useFetch<D>(
+        return useFetch<D, T>(
             config.endPoint,
             'DELETE',
             config.bodyDefault,
@@ -116,14 +116,14 @@ export default class BackendCall {
         );
     }
 
-    public custom<D>(config: {
+    public custom<D, T = any>(config: {
         endPoint: string;
         method: string;
         bodyDefault?: bodyType;
         queryDefault?: objectStringsType;
         useFetchCustomConfig?: useFetchConfig;
     }) {
-        return useFetch<D>(
+        return useFetch<D, T>(
             config.endPoint,
             config.method,
             config.bodyDefault,
