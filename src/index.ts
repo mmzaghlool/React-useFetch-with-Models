@@ -1,5 +1,6 @@
 import BackendCall from './BackendCall';
 import fetchData from './fetchData';
-import {useFetchConfig} from './types';
 
-export {BackendCall, fetchData, useFetchConfig};
+export {BackendCall, fetchData};
+
+export type {useFetchConfig, bodyType, objectStringsType, useFetchType} from './types';
