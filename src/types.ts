@@ -4,7 +4,7 @@ export type useFetchType<D, T = any> = [
     loading: boolean,
     execute: (data: D, headers?: objectStringsType) => Promise<T>,
     data: T | undefined,
-    error: objectStringsType | string | undefined,
+    error: any,
 ];
 
 export type useFetchConfig = {

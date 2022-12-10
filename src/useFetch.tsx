@@ -16,7 +16,7 @@ function useFetch<D = bodyType, T = any>(
 ): useFetchType<D, T> {
     const [data, setData] = useState<any>();
     const [loading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<objectStringsType>();
+    const [error, setError] = useState<any>();
 
     const execute = useCallback((data: D, headers?: objectStringsType): Promise<T> => {
         setLoading(true);
